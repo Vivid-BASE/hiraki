@@ -2,6 +2,7 @@
 
 import profileData from '@/data/profile.json';
 import { motion } from 'framer-motion';
+import { getImagePath } from '@/utils/imagePath';
 
 export default function Hero() {
     // Defines the text reveal animation variants
@@ -46,7 +47,7 @@ export default function Hero() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backgroundImage: 'url(/images/hero_new.jpg)',
+                    backgroundImage: `url(${getImagePath('/images/hero_new.jpg')})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'top center',
                     zIndex: -2,
@@ -108,7 +109,7 @@ export default function Hero() {
                             >
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src="/images/discography/isesaki_miyako_machi.jpg"
+                                    src={getImagePath('/images/discography/isesaki_miyako_machi.jpg')}
                                     alt="伊勢崎宮子町 CD Jacket"
                                     style={{ width: '100%', height: 'auto', display: 'block' }}
                                 />
