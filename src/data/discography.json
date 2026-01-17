@@ -1,0 +1,44 @@
+[
+    {
+        "id": "isesaki-miyako-machi",
+        "title": "伊勢崎宮子町 / 雨の青山",
+        "releaseDate": "2025.07.23",
+        "price": "¥1,400 (税込)",
+        "productCode": "YZWG-15343 (A-force / 徳間ジャパン)",
+        "description": "74歳デビューから2年、開たかお待望のセカンドシングル。地元・群馬県伊勢崎市宮子町を舞台に、郷愁とロマンを歌い上げる意欲作。作詞・小暮哲朗、編曲・WATABEによる本格演歌。カップリングには深沢孝男作詞・作曲の「雨の青山」を収録。",
+        "tracks": [
+            "1. 伊勢崎宮子町",
+            "2. 雨の青山",
+            "3. 伊勢崎宮子町 (オリジナル・カラオケ)",
+            "4. 雨の青山 (オリジナル・カラオケ)"
+        ],
+        "image": "/images/discography/isesaki_miyako_machi.jpg",
+        "links": {
+            "aforce": "https://aforce.stores.jp/items/6813203a4adc3230f1d3a46b",
+            "tower": "https://tower.jp/item/6836516",
+            "hmv": "https://www.hmv.co.jp/artist_%E9%96%8B%E3%81%9F%E3%81%8B%E3%81%8A_000000000933674/item_%E4%BC%8A%E5%8B%A2%E5%B4%8E%E5%AE%AE%E5%AD%90%E7%94%BA-%E9%9B%A8%E3%81%AE%E9%9D%92%E5%B1%B1_15924721",
+            "crownTokuma": "https://shop-crtk.com/item/102058",
+            "rakuten": "https://item.rakuten.co.jp/all-kimuraya-jimbocho/9341565018/",
+            "apple": "https://music.apple.com/jp/album/%E4%BC%8A%E5%8B%A2%E5%B4%8E%E5%AE%AE%E5%AD%90%E7%94%BA-ep/1827215947"
+        }
+    },
+    {
+        "id": "mayoizake",
+        "title": "迷い酒 / 未練",
+        "releaseDate": "2023.05.24",
+        "price": "¥1,300 (税込)",
+        "productCode": "SPRO-1157",
+        "description": "実業家・開たかお、74歳の挑戦。人生の酸いも甘いも噛み分けた男が歌う、大人の演歌。デビューシングル。",
+        "tracks": [
+            "1. 迷い酒",
+            "2. 未練",
+            "3. 迷い酒 (オリジナル・カラオケ)",
+            "4. 未練 (オリジナル・カラオケ)"
+        ],
+        "image": "/images/discography/mayoizake.jpg",
+        "links": {
+            "tower": "https://tower.jp/item/5728545",
+            "apple": "https://music.apple.com/jp/album/mayoizake-miren-ep/1688828697"
+        }
+    }
+]
