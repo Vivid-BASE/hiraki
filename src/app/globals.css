@@ -225,3 +225,22 @@ a:hover {
     max-width: 1200px;
   }
 }
+
+/* Video Gallery Responsive Actions - Global Utilities */
+.video-desktop-only {
+  display: block !important;
+}
+
+.video-mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .video-desktop-only {
+    display: none !important;
+  }
+
+  .video-mobile-only {
+    display: block !important;
+  }
+}

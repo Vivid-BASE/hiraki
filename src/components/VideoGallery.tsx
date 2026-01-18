@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import styles from './VideoGallery.module.css';
 
 const videos = [
     {
@@ -36,105 +37,177 @@ const videos = [
 ];
 
 export default function VideoGallery() {
-    const [featuredVideo, setFeaturedVideo] = useState(videos[0]); // videos[0] is Isesaki Miyakocho
+    const [featuredVideo, setFeaturedVideo] = useState(videos[0]);
+    // State to track playing video on mobile (id or null)
+    const [playingMobileVideoId, setPlayingMobileVideoId] = useState<string | null>(null);
 
     return (
         <section id="video" className="section">
             <div className="container">
                 <h2 className="section-title">Video Gallery</h2>
 
-                {/* Featured Video Player */}
-                <div style={{
-                    marginBottom: '4rem',
-                    textAlign: 'center'
-                }}>
+                {/* DESKTOP VIEW: Featured Player + Grid */}
+                <div className="video-desktop-only">
+                    {/* Featured Video Player */}
                     <div style={{
-                        position: 'relative',
-                        width: '100%',
-                        maxWidth: '900px',
-                        margin: '0 auto',
-                        aspectRatio: '16 / 9',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
-                        border: '1px solid rgba(197, 160, 89, 0.3)'
+                        marginBottom: '4rem',
+                        textAlign: 'center'
                     }}>
-                        <iframe
-                            key={featuredVideo.id}
-                            width="100%"
-                            height="100%"
-                            src={`https://www.youtube.com/embed/${featuredVideo.id}`}
-                            title={featuredVideo.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0
-                            }}
-                        ></iframe>
+                        <div style={{
+                            position: 'relative',
+                            width: '100%',
+                            maxWidth: '900px',
+                            margin: '0 auto',
+                            aspectRatio: '16 / 9',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+                            border: '1px solid rgba(197, 160, 89, 0.3)'
+                        }}>
+                            <iframe
+                                key={featuredVideo.id}
+                                width="100%"
+                                height="100%"
+                                src={`https://www.youtube.com/embed/${featuredVideo.id}`}
+                                title={featuredVideo.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0
+                                }}
+                            ></iframe>
+                        </div>
+                        <div style={{ marginTop: '1.5rem', maxWidth: '800px', margin: '1.5rem auto 0' }}>
+                            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--color-gold)' }}>
+                                {featuredVideo.title}
+                            </h3>
+                            <p style={{ color: 'var(--color-text-muted)' }}>{featuredVideo.description}</p>
+                        </div>
                     </div>
-                    <div style={{ marginTop: '1.5rem', maxWidth: '800px', margin: '1.5rem auto 0' }}>
-                        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--color-gold)' }}>
-                            {featuredVideo.title}
-                        </h3>
-                        <p style={{ color: 'var(--color-text-muted)' }}>{featuredVideo.description}</p>
+
+                    {/* Video Grid */}
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                        gap: '2rem'
+                    }}>
+                        {videos.map((video) => (
+                            <div
+                                key={video.id}
+                                onClick={() => setFeaturedVideo(video)}
+                                style={{
+                                    cursor: 'pointer',
+                                    borderRadius: '8px',
+                                    overflow: 'hidden',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    border: featuredVideo.id === video.id ? '1px solid var(--color-gold)' : '1px solid rgba(255,255,255,0.1)',
+                                    backgroundColor: 'rgba(255,255,255,0.03)'
+                                }}
+                                className="video-thumbnail"
+                            >
+                                <div style={{ position: 'relative', aspectRatio: '16/9' }}>
+                                    <img
+                                        src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                                        alt={video.title}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
+                                    <div style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: 'rgba(0,0,0,0.3)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <span style={{ fontSize: '2rem', color: '#fff' }}>▶</span>
+                                    </div>
+                                </div>
+                                <div style={{ padding: '1rem' }}>
+                                    <span style={{
+                                        display: 'inline-block',
+                                        fontSize: '0.7rem',
+                                        padding: '0.2rem 0.6rem',
+                                        backgroundColor: 'rgba(197, 160, 89, 0.2)',
+                                        color: 'var(--color-gold)',
+                                        borderRadius: '12px',
+                                        marginBottom: '0.5rem'
+                                    }}>
+                                        {video.category}
+                                    </span>
+                                    <h4 style={{ fontSize: '0.95rem', lineHeight: '1.4', marginBottom: '0' }}>
+                                        {video.title}
+                                    </h4>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Video Grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: '2rem'
-                }}>
+                {/* MOBILE VIEW: Vertical List of Players */}
+                <div className="video-mobile-only">
                     {videos.map((video) => (
-                        <div
-                            key={video.id}
-                            onClick={() => setFeaturedVideo(video)}
-                            style={{
-                                cursor: 'pointer',
-                                borderRadius: '8px',
-                                overflow: 'hidden',
-                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                                border: featuredVideo.id === video.id ? '1px solid var(--color-gold)' : '1px solid rgba(255,255,255,0.1)',
-                                backgroundColor: 'rgba(255,255,255,0.03)'
-                            }}
-                            className="video-thumbnail"
-                        >
-                            <div style={{ position: 'relative', aspectRatio: '16/9' }}>
-                                <img
-                                    src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
-                                    alt={video.title}
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
-                                <div style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    backgroundColor: 'rgba(0,0,0,0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    <span style={{ fontSize: '2rem', color: '#fff' }}>▶</span>
-                                </div>
+                        <div key={video.id} className={styles.mobileVideoCard}>
+                            <div className={styles.videoWrapper}>
+                                {playingMobileVideoId === video.id ? (
+                                    <iframe
+                                        width="100%"
+                                        height="100%"
+                                        src={`https://www.youtube.com/embed/${video.id}?autoplay=1`}
+                                        title={video.title}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        style={{ position: 'absolute', top: 0, left: 0 }}
+                                    ></iframe>
+                                ) : (
+                                    <div
+                                        onClick={() => setPlayingMobileVideoId(video.id)}
+                                        style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <img
+                                            src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                                            alt={video.title}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        />
+                                        <div style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            backgroundColor: 'rgba(0,0,0,0.3)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                            <div style={{
+                                                width: '60px',
+                                                height: '60px',
+                                                backgroundColor: 'rgba(0,0,0,0.6)',
+                                                borderRadius: '50%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                border: '2px solid #fff'
+                                            }}>
+                                                <span style={{ fontSize: '24px', color: '#fff', marginLeft: '4px' }}>▶</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            <div style={{ padding: '1rem' }}>
-                                <span style={{
-                                    display: 'inline-block',
-                                    fontSize: '0.7rem',
-                                    padding: '0.2rem 0.6rem',
-                                    backgroundColor: 'rgba(197, 160, 89, 0.2)',
-                                    color: 'var(--color-gold)',
-                                    borderRadius: '12px',
-                                    marginBottom: '0.5rem'
-                                }}>
+                            <div className={styles.videoInfo}>
+                                <span className={styles.categoryTag}>
                                     {video.category}
                                 </span>
-                                <h4 style={{ fontSize: '0.95rem', lineHeight: '1.4', marginBottom: '0' }}>
+                                <h4 className={styles.videoTitle}>
                                     {video.title}
                                 </h4>
+                                <p className={styles.videoDesc}>{video.description}</p>
                             </div>
                         </div>
                     ))}
