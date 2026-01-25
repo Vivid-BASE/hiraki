@@ -38,7 +38,7 @@ export default function Schedule() {
 
                 {events.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '3rem', color: '#888' }}>
-                        <p>現在、予定されているイベントはありません。</p>
+                        <p className="text-gray-400">次の幕が上がるまで、しばしお待ちを</p>
                     </div>
                 ) : (
                     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
